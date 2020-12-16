@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "999478941198",
+    "firebase_url": "https://simulasihidro-default-rtdb.firebaseio.com/",
+    "project_id": "simulasihidro",
+    "storage_bucket": "simulasihidro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999478941198:android:936148d4cca1f999298e5f",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.Projectwithfirebasehidroponik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "999478941198-biim0kg2pjke6lh2cmebsah9qjtldvmu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb2ocxQMP4IfRaC1BlGzXG2K-F7M7Ed8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "999478941198-biim0kg2pjke6lh2cmebsah9qjtldvmu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
