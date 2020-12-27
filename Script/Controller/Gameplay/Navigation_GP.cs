@@ -198,18 +198,21 @@ public class Navigation_GP : MonoBehaviour
     public void exitValidation()
     {
         exitAlert.rectTransform.anchoredPosition = new Vector2(-196, -26.394f);
+        Time.timeScale = 0;
     }
 
     public void exitAnswerYes()
     {
-        Loading_auth.saveGame();
-        SceneManager.LoadScene("Loading");
+        Loading_auth.closeGame();
+        Login_auth.login_status = false;
+        Loading_auth.loading.waterAmount = 0;
         
     }
 
     public void exitAnswerNo()
     {
         exitAlert.rectTransform.anchoredPosition = new Vector2(-1772, 117);
+        Time.timeScale = 1;
     }
 
     public void addWater()
@@ -226,6 +229,21 @@ public class Navigation_GP : MonoBehaviour
     }
 
     private void Update()
+    {
+        checkGameParalon();
+        checkGameNormal();
+    }
+
+    void checkGameNormal()
+    {
+        if(Growth_GP.status_gameOver == true)
+        {
+            over.rectTransform.anchoredPosition = new Vector2(-188, -60);
+            Time.timeScale = 0;
+        }
+    }
+
+    void checkGameParalon()
     {
         if (water_status == true && Help_nav_GB.harvest == false)
         {
@@ -255,7 +273,7 @@ public class Navigation_GP : MonoBehaviour
         gameover_status = true;
         // Loading_auth.DestroyGameID();
         //  SceneManager.LoadScene("Loading");
-        Application.Quit();
+        SceneManager.LoadScene("MainMenu");
     }
 
 

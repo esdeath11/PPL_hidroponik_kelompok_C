@@ -13,10 +13,12 @@ public class Growth_GP : MonoBehaviour
     int toggle_time;
     float age, timer, seconds;
     bool plant_status, harvest_status;
+    public static bool status_gameOver;
 
   
     void Start()
     {
+        status_gameOver = false;
         water = new Water();
         toggle_time = 1;
         this.plant_status = false;
@@ -58,6 +60,28 @@ public class Growth_GP : MonoBehaviour
 
         }
 
+        else if (Item_inventory.codePlant == "bayam" && Plating_GP.rockwool_status == true && Navigation_GP.status_Place == true)
+        {
+            Debug.Log(plant_status);
+            if (plant_status == false)
+            {
+                if (Item_inventory.bayam > 0)
+                {
+                   // this.Rwool.sprite = biji_bayam;
+                    Item_inventory.bayam -= 1;
+                    Debug.Log("Selada = " + Item_inventory.bayam);
+                    this.plant_status = true;
+                }
+                else
+                {
+                    Debug.Log("Biji bayam tidak cukup silahkan beli");
+                }
+
+            }
+
+
+        }
+
     }
 
 
@@ -65,6 +89,7 @@ public class Growth_GP : MonoBehaviour
     {
         if(this.plant_status == true)
         {
+            Help_nav_GB.plant_stat = plant_status;
             loseWater();
         }
     }
@@ -77,10 +102,12 @@ public class Growth_GP : MonoBehaviour
             if (this.water.waterAmount < 95)
             {
                 this.water.waterAmount += 10;
+                Item_inventory.vitamin -= 10;
             }
             if (this.water.waterAmount > 95 && this.water.waterAmount <= 100)
             {
                 this.water.waterAmount = 100;
+                Item_inventory.vitamin -= 4;
             }
         }
     }
@@ -120,6 +147,7 @@ public class Growth_GP : MonoBehaviour
             timer = 0;
             this.plant_status = false;
             this.harvest_status = false;
+            Help_nav_GB.plant_stat = false;
         }
 
         else if(harvest_status == false)
@@ -146,7 +174,7 @@ public class Growth_GP : MonoBehaviour
     {
         if(this.water.waterAmount < 1 && this.plant_status == true)
         {
-            Shop_GP.money_value -= 1 * (Mathf.FloorToInt(timer % 60));
+            status_gameOver = true;
         }
     }
 

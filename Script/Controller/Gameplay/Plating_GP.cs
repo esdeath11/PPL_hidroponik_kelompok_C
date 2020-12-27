@@ -18,7 +18,7 @@ public class Plating_GP : MonoBehaviour
     {
         
         toggle_rwool = 1;
-        rockwool_status = false;
+        rockwool_status = true;
         toggle_flush = 1;
     }
 
@@ -77,11 +77,11 @@ public class Plating_GP : MonoBehaviour
                 flush_stat = true;
                 toggle_flush = 2;
                 SiramAlert.rectTransform.anchoredPosition = new Vector2(-170, -25.687f);
-                Siram_Alert.text = "Siram Actived";
+                Siram_Alert.text = "Vitamin Actived";
                 break;
             case 2:
                 toggle_flush = 1;
-                Siram_Alert.text = "Siram Deactived";
+                Siram_Alert.text = "Vitamin Deactived";
                 SiramAlert.rectTransform.anchoredPosition = new Vector2(-170, -25.687f);
                 flush_stat = false;
                 break;

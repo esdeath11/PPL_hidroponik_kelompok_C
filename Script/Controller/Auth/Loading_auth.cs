@@ -8,13 +8,14 @@ using Firebase.Database;
 using Firebase.Auth;
 public class Loading_auth : MonoBehaviour
 {
-    Loading loading;
+    public static Loading loading;
     static string saveUsername;
     static DatabaseReference reference;
     [SerializeField] Image LoadingImage;
     // Start is called before the first frame update
     void Start()
     {
+
         loading = new Loading();
         reference = FirebaseDatabase.DefaultInstance.RootReference;
     }
@@ -22,18 +23,33 @@ public class Loading_auth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.loading.Update();
+        loading.Update();
         LoadingImage.fillAmount = loading.GetWaterNormalized();
-        if(loading.waterAmount > 99 && Register_auth.register_status == true)
+        checkValidation();
+    }
+
+    void checkValidation()
+    {
+        if (loading.waterAmount > 99 && Register_auth.register_status == true)
         {
             Login_auth.username_lg = Register_auth.username_rg;
             Login_auth.loading();
         }
 
-        else if(loading.waterAmount > 99 && Login_auth.login_status == true)
+        else if (loading.waterAmount > 99 && Login_auth.login_status == true)
         {
             SceneManager.LoadScene("Gameplay");
         }
+
+        else if (loading.waterAmount > 99 && Login_auth.login_status == false)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
+
+    public static void closeGame()
+    {
+        saveGame();
     }
 
     public static void saveGame()
@@ -45,6 +61,7 @@ public class Loading_auth : MonoBehaviour
         reference.Child(saveUsername).Child("Inventory").Child("Tools").Child("Rockwool").SetValueAsync(Item_inventory.rockwool).ToString();
         reference.Child(saveUsername).Child("Shop").Child("Economy").Child("Money").SetValueAsync(Shop_GP.money_value).ToString();
         reference.Child(saveUsername).Child("Inventory").Child("Bibit").Child("Bibit Selada").SetValueAsync(Item_inventory.bibit_Selada).ToString();
+        SceneManager.LoadScene("MainMenu");
     }
 
     public static void DestroyGameID()
